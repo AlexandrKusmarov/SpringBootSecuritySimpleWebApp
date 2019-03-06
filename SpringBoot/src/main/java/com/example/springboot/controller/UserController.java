@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @PreAuthorize("hasAuthority('ADMIN')")
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
