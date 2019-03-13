@@ -1,7 +1,9 @@
 package com.example.springboot.controller;
 
+import com.example.springboot.Service.UserService;
 import com.example.springboot.domain.Role;
 import com.example.springboot.domain.User;
+import com.example.springboot.repositories.UserCrudRepository;
 import com.example.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String userList(Model model){
@@ -61,5 +66,11 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        userService.delete(id);
+
+        return "redirect:/user";
+    }
 
 }

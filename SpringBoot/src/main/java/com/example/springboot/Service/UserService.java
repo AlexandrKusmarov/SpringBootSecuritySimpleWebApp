@@ -2,6 +2,7 @@ package com.example.springboot.Service;
 
 import com.example.springboot.domain.Role;
 import com.example.springboot.domain.User;
+import com.example.springboot.repositories.UserCrudRepository;
 import com.example.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private MailSender mailSender;
+
+    @Autowired
+    private UserCrudRepository userCrudRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -65,5 +69,9 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         return true;
+    }
+
+    public void delete(long id){
+        userCrudRepository.deleteById(id);
     }
 }
